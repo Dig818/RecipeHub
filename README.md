@@ -8,7 +8,7 @@
 ## 🌐 Live Demo
 
 🔗 **[View Live Site](https://yourusername.github.io/recipehub)**  
-*(Replace with your actual GitHub Pages URL after deployment)*
+
 
 ---
 
@@ -107,7 +107,7 @@ recipehub/
 ### Option 1 — Open directly in browser
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/recipehub.git
+git clone https://github.com/dig818/recipehub.git
 
 # Open in VS Code
 code recipehub
@@ -151,8 +151,8 @@ Every HTML page must load scripts in this exact order:
 - **Course:** Web Technology (BIT)
 - **Institution:** Texas College of Management & IT, Kathmandu
 - **Project Theme:** Recipe Sharing Website (#12)
-- **Student:** ________________________
-- **LCID:** ________________________
+- **Student:** Digdarshan Khadka
+- **LCID:** 
 
 ---
 
