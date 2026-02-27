@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Full recipe details, ingredients, steps and reviews on RecipeHub." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>Recipe Detail — RecipeHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/form.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/recipe-detail.css" />
+</head>
+<body>
+
+<div id="page-loader" class="page-loader"><div class="loader-logo"><i class="fas fa-utensils"></i><span>RecipeHub</span></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner" aria-label="Main navigation">
+      <a href="index.html" class="navbar__logo">
+        <div class="navbar__logo-icon"><i class="fas fa-utensils"></i></div>
+        <span class="navbar__logo-text">Recipe<span>Hub</span></span>
+      </a>
+      <ul class="navbar__nav" role="list">
+        <li><a href="index.html"   class="navbar__link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="recipes.html" class="navbar__link"><i class="fas fa-book-open"></i> Recipes</a></li>
+        <li><a href="submit.html"  class="navbar__link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+        <li><a href="profile.html" class="navbar__link"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <div class="navbar__auth">
+          <button class="btn btn-ghost btn-sm" id="login-btn">Login</button>
+          <button class="btn btn-primary btn-sm" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+        </div>
+        <div class="navbar__user"><a href="profile.html" class="navbar__user-avatar">RS</a></div>
+        <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<nav class="navbar__mobile-menu" aria-label="Mobile navigation">
+  <ul class="navbar__mobile-links" role="list">
+    <li><a href="index.html"   class="navbar__mobile-link"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i> Recipes</a></li>
+    <li><a href="submit.html"  class="navbar__mobile-link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+    <li><a href="profile.html" class="navbar__mobile-link"><i class="fas fa-user"></i> Profile</a></li>
+  </ul>
+  <div class="navbar__mobile-actions" id="mobile-auth-section">
+    <button class="btn btn-outline w-100" id="mobile-login-btn">Login</button>
+    <button class="btn btn-primary w-100" id="mobile-register-btn">Create Account</button>
+  </div>
+</nav>
+
+<main class="recipe-detail-page">
+
+  <!-- HERO -->
+  <section class="recipe-hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="recipe-hero__inner">
+        <div class="recipe-hero__content">
+          <nav class="recipe-hero__breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="recipes.html">Recipes</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="recipes.html" id="hero-breadcrumb-cat">Category</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="hero-breadcrumb-title">Recipe</span>
+          </nav>
+          <div class="recipe-hero__tags" id="hero-tags"></div>
+          <h1 class="recipe-hero__title" id="hero-title">Loading...</h1>
+          <p class="recipe-hero__desc" id="hero-desc"></p>
+          <div class="recipe-hero__author">
+            <div class="recipe-hero__author-avatar" id="hero-author-initials">RS</div>
+            <div>
+              <div class="recipe-hero__author-name" id="hero-author-name">Chef</div>
+              <div class="recipe-hero__author-date">Community Member</div>
+            </div>
+          </div>
+          <div id="hero-rating" style="display:flex;align-items:center;gap:8px;margin-bottom:var(--space-6)"></div>
+          <div class="recipe-hero__actions">
+            <button class="btn btn-primary" id="detail-bookmark-btn">
+              <i class="far fa-bookmark"></i> <span>Save Recipe</span>
+            </button>
+            <a href="recipes.html" class="btn btn-outline">
+              <i class="fas fa-arrow-left"></i> Back to Recipes
+            </a>
+          </div>
+        </div>
+        <div class="recipe-hero__image" id="hero-emoji" aria-hidden="true">🍛</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK STATS BAR -->
+  <div class="quick-stats-bar" role="region" aria-label="Recipe statistics">
+    <div class="container">
+      <div class="quick-stats-bar__inner">
+        <div class="quick-stat"><div class="quick-stat__icon">⏱️</div><div class="quick-stat__value" id="qs-prep">—</div><div class="quick-stat__label">Prep Time</div></div>
+        <div class="quick-stat"><div class="quick-stat__icon">🔥</div><div class="quick-stat__value" id="qs-cook">—</div><div class="quick-stat__label">Cook Time</div></div>
+        <div class="quick-stat"><div class="quick-stat__icon">⏰</div><div class="quick-stat__value" id="qs-total">—</div><div class="quick-stat__label">Total Time</div></div>
+        <div class="quick-stat"><div class="quick-stat__icon">👥</div><div class="quick-stat__value" id="qs-servings">—</div><div class="quick-stat__label">Servings</div></div>
+        <div class="quick-stat"><div class="quick-stat__icon">🌿</div><div class="quick-stat__value" id="qs-calories">—</div><div class="quick-stat__label">Calories</div></div>
+        <div class="quick-stat"><div class="quick-stat__icon">📊</div><div class="quick-stat__value" id="qs-difficulty">—</div><div class="quick-stat__label">Difficulty</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <section class="recipe-body" aria-label="Recipe content">
+    <div class="container">
+      <div class="recipe-body__layout">
+
+        <!-- LEFT: Ingredients + Steps + Reviews -->
+        <div>
+          <!-- Ingredients -->
+          <div class="recipe-panel" id="ingredients-panel">
+            <h2 class="recipe-panel__title"><i class="fas fa-list"></i> Ingredients</h2>
+            <div class="servings-control">
+              <span class="servings-control__label">Adjust Servings:</span>
+              <div class="servings-control__buttons">
+                <button class="servings-control__btn" id="servings-minus" aria-label="Decrease servings">−</button>
+                <span class="servings-control__count" id="servings-count">4</span>
+                <button class="servings-control__btn" id="servings-plus"  aria-label="Increase servings">+</button>
+              </div>
+            </div>
+            <div id="ingredients-list"></div>
+            <p style="font-size:var(--text-xs);color:var(--color-muted);margin-top:var(--space-4)"><i class="fas fa-info-circle"></i> Click ingredients to check them off as you cook.</p>
+          </div>
+
+          <!-- Steps -->
+          <div class="recipe-panel">
+            <h2 class="recipe-panel__title"><i class="fas fa-list-ol"></i> Instructions</h2>
+            <div id="steps-list"></div>
+          </div>
+
+          <!-- Reviews -->
+          <div class="recipe-panel">
+            <h2 class="recipe-panel__title"><i class="fas fa-star"></i> Reviews <span id="reviews-count" style="font-size:var(--text-sm);font-weight:400;color:var(--color-muted)"></span></h2>
+            <div id="reviews-list"></div>
+          </div>
+
+          <!-- Leave a Review -->
+          <div class="leave-review">
+            <h3 style="margin-bottom:var(--space-2)">Leave a Review</h3>
+            <p style="font-size:var(--text-sm);color:var(--color-mid);margin-bottom:var(--space-5)">Share your experience with this recipe.</p>
+            <form id="review-form" novalidate>
+              <div class="form-group">
+                <label class="form-label">Your Rating <span class="required">*</span></label>
+                <div id="review-stars-wrap" class="leave-review__stars"></div>
+                <div id="rating-value" style="font-size:var(--text-xs);color:var(--color-primary);margin-top:var(--space-2);font-weight:600"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="review-text">Your Review <span class="required">*</span></label>
+                <textarea id="review-text" class="form-control" rows="4" placeholder="What did you think? Any tips for other cooks?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Review</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT: Nutrition + Sidebar -->
+        <aside class="recipe-sidebar" aria-label="Nutrition and related info">
+          <div class="recipe-panel" id="nutrition-panel">
+            <h2 class="recipe-panel__title" style="font-size:var(--text-lg)"><i class="fas fa-chart-pie"></i> Nutrition (per serving)</h2>
+            <table class="nutrition-table">
+              <tbody id="nutrition-tbody"></tbody>
+            </table>
+          </div>
+          <div class="recipe-panel">
+            <h2 class="recipe-panel__title" style="font-size:var(--text-lg)"><i class="fas fa-share-alt"></i> Share This Recipe</h2>
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+              <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText(window.location.href).then(function(){showToast('Link copied! 🔗','success')})"><i class="fas fa-link"></i> Copy Link</button>
+              <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-facebook-f"></i> Share</a>
+              <a href="#" class="btn btn-outline btn-sm"><i class="fab fa-x-twitter"></i> Tweet</a>
+            </div>
+          </div>
+        </aside>
+
+      </div><!-- /recipe-body__layout -->
+    </div>
+  </section>
+
+  <!-- RELATED RECIPES -->
+  <section class="related-recipes" id="related-section" aria-labelledby="related-heading">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-8)">
+        <h2 id="related-heading">You Might Also Like</h2>
+        <a href="recipes.html" class="btn btn-outline">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="related-grid stagger" id="related-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo"><div class="footer__logo-icon"><i class="fas fa-utensils"></i></div><span class="footer__logo-text">Recipe<span>Hub</span></span></a>
+        <p class="footer__desc">Community-driven recipe sharing. Discover, cook, and share.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <nav class="footer__col"><h3 class="footer__col-title">Explore</h3><ul class="footer__links"><li><a href="recipes.html" class="footer__link"><i class="fas fa-chevron-right"></i> All Recipes</a></li><li><a href="submit.html" class="footer__link"><i class="fas fa-chevron-right"></i> Share Recipe</a></li></ul></nav>
+      <nav class="footer__col"><h3 class="footer__col-title">Account</h3><ul class="footer__links"><li><a href="profile.html" class="footer__link"><i class="fas fa-chevron-right"></i> My Profile</a></li></ul></nav>
+      <div class="footer__newsletter"><h3 class="footer__col-title">Newsletter</h3><p>Get weekly recipes in your inbox.</p><form class="footer__newsletter-form" novalidate><input type="email" class="footer__newsletter-input" placeholder="Your email" /><button type="submit" class="footer__newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button></form></div>
+    </div>
+    <div class="footer__bottom"><p class="footer__copyright">&copy; 2025 <a href="index.html">RecipeHub</a>.</p></div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal__close" id="auth-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal__logo"><div class="modal__logo-icon"><i class="fas fa-utensils"></i></div><span class="modal__logo-text">RecipeHub</span></div>
+    <div class="modal__tabs" role="tablist">
+      <button class="modal__tab active" data-tab="login" role="tab">Login</button>
+      <button class="modal__tab" data-tab="register" role="tab">Register</button>
+    </div>
+    <div id="login-panel" role="tabpanel">
+      <h3 id="modal-title">Welcome back!</h3><p class="subtitle">Sign in to save and review recipes.</p>
+      <form id="login-form" novalidate>
+        <div class="form-group"><label class="form-label" for="login-email">Email <span class="required">*</span></label><input type="email" id="login-email" class="form-control" placeholder="you@example.com" /></div>
+        <div class="form-group"><label class="form-label" for="login-password">Password <span class="required">*</span></label><input type="password" id="login-password" class="form-control" placeholder="Your password" /></div>
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+    </div>
+    <div id="register-panel" style="display:none" role="tabpanel">
+      <h3>Create Account</h3><p class="subtitle">Join free and start saving recipes.</p>
+      <form id="register-form" novalidate>
+        <div class="form-group"><label class="form-label" for="register-name">Full Name <span class="required">*</span></label><input type="text" id="register-name" class="form-control" placeholder="Your name" /></div>
+        <div class="form-group"><label class="form-label" for="register-email">Email <span class="required">*</span></label><input type="email" id="register-email" class="form-control" placeholder="you@example.com" /></div>
+        <div class="form-group"><label class="form-label" for="register-password">Password <span class="required">*</span></label><input type="password" id="register-password" class="form-control" placeholder="Min 8 characters" /></div>
+        <div class="form-group"><label class="form-label" for="register-confirm">Confirm <span class="required">*</span></label><input type="password" id="register-confirm" class="form-control" placeholder="Repeat password" /></div>
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/recipe-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse all recipes on RecipeHub. Filter by category, cuisine, diet and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>Recipes — RecipeHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/form.css" />
+  <link rel="stylesheet" href="assets/css/filter.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/recipes.css" />
+</head>
+<body>
+
+<div id="page-loader" class="page-loader"><div class="loader-logo"><i class="fas fa-utensils"></i><span>RecipeHub</span></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner" aria-label="Main navigation">
+      <a href="index.html" class="navbar__logo" aria-label="RecipeHub homepage">
+        <div class="navbar__logo-icon"><i class="fas fa-utensils"></i></div>
+        <span class="navbar__logo-text">Recipe<span>Hub</span></span>
+      </a>
+      <ul class="navbar__nav" role="list">
+        <li><a href="index.html"   class="navbar__link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="recipes.html" class="navbar__link"><i class="fas fa-book-open"></i> Recipes</a></li>
+        <li><a href="submit.html"  class="navbar__link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+        <li><a href="profile.html" class="navbar__link"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <div class="navbar__auth">
+          <button class="btn btn-ghost btn-sm" id="login-btn">Login</button>
+          <button class="btn btn-primary btn-sm" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+        </div>
+        <div class="navbar__user">
+          <a href="profile.html" class="navbar__user-avatar">RS</a>
+        </div>
+        <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<nav class="navbar__mobile-menu" aria-label="Mobile navigation">
+  <ul class="navbar__mobile-links" role="list">
+    <li><a href="index.html"   class="navbar__mobile-link"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i> Recipes</a></li>
+    <li><a href="submit.html"  class="navbar__mobile-link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+    <li><a href="profile.html" class="navbar__mobile-link"><i class="fas fa-user"></i> Profile</a></li>
+  </ul>
+  <div class="navbar__mobile-actions" id="mobile-auth-section">
+    <button class="btn btn-outline w-100" id="mobile-login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <button class="btn btn-primary w-100" id="mobile-register-btn"><i class="fas fa-user-plus"></i> Create Account</button>
+  </div>
+</nav>
+
+<main class="page-content">
+
+  <!-- PAGE BANNER -->
+  <section class="recipes-banner" aria-labelledby="recipes-heading">
+    <div class="container">
+      <div class="recipes-banner__inner">
+        <div>
+          <span class="label">Discover &amp; Cook</span>
+          <h1 id="recipes-heading">All Recipes</h1>
+          <p>Browse our community collection of 1,200+ hand-crafted recipes.</p>
+          <div id="banner-active-cat" class="recipes-banner__active-cat" style="display:none"></div>
+        </div>
+        <a href="submit.html" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Share a Recipe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="recipes-page" aria-label="Recipe listing">
+    <div class="container">
+      <div class="recipes-layout">
+
+        <!-- FILTER SIDEBAR -->
+        <aside id="filter-sidebar" class="filter-sidebar" aria-label="Recipe filters">
+          <div class="filter-sidebar__header">
+            <span class="filter-sidebar__title"><i class="fas fa-sliders-h"></i> Filters</span>
+            <button class="filter-sidebar__clear" id="clear-all-filters">Clear All</button>
+          </div>
+
+          <!-- Category -->
+          <div class="filter-group">
+            <div class="filter-group__title">Category <i class="fas fa-chevron-down"></i></div>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="radio" name="filter-category" data-filter="category" value="Breakfast"><span class="filter-option__label">🍳 Breakfast</span><span class="filter-option__count">124</span></label>
+              <label class="filter-option"><input type="radio" name="filter-category" data-filter="category" value="Lunch"><span class="filter-option__label">🥗 Lunch</span><span class="filter-option__count">98</span></label>
+              <label class="filter-option"><input type="radio" name="filter-category" data-filter="category" value="Dinner"><span class="filter-option__label">🍝 Dinner</span><span class="filter-option__count">215</span></label>
+              <label class="filter-option"><input type="radio" name="filter-category" data-filter="category" value="Dessert"><span class="filter-option__label">🧁 Dessert</span><span class="filter-option__count">87</span></label>
+              <label class="filter-option"><input type="radio" name="filter-category" data-filter="category" value="Drinks"><span class="filter-option__label">🍹 Drinks</span><span class="filter-option__count">41</span></label>
+            </div>
+          </div>
+
+          <!-- Cuisine -->
+          <div class="filter-group">
+            <div class="filter-group__title">Cuisine <i class="fas fa-chevron-down"></i></div>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="radio" name="filter-cuisine" data-filter="cuisine" value="Nepali"><span class="filter-option__label">🇳🇵 Nepali</span><span class="filter-option__count">48</span></label>
+              <label class="filter-option"><input type="radio" name="filter-cuisine" data-filter="cuisine" value="Italian"><span class="filter-option__label">🇮🇹 Italian</span><span class="filter-option__count">67</span></label>
+              <label class="filter-option"><input type="radio" name="filter-cuisine" data-filter="cuisine" value="Thai"><span class="filter-option__label">🇹🇭 Thai</span><span class="filter-option__count">34</span></label>
+              <label class="filter-option"><input type="radio" name="filter-cuisine" data-filter="cuisine" value="American"><span class="filter-option__label">🇺🇸 American</span><span class="filter-option__count">89</span></label>
+              <label class="filter-option"><input type="radio" name="filter-cuisine" data-filter="cuisine" value="French"><span class="filter-option__label">🇫🇷 French</span><span class="filter-option__count">22</span></label>
+            </div>
+          </div>
+
+          <!-- Difficulty -->
+          <div class="filter-group">
+            <div class="filter-group__title">Difficulty <i class="fas fa-chevron-down"></i></div>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="radio" name="filter-difficulty" data-filter="difficulty" value="Beginner"><span class="filter-option__label">Beginner</span></label>
+              <label class="filter-option"><input type="radio" name="filter-difficulty" data-filter="difficulty" value="Intermediate"><span class="filter-option__label">Intermediate</span></label>
+              <label class="filter-option"><input type="radio" name="filter-difficulty" data-filter="difficulty" value="Advanced"><span class="filter-option__label">Advanced</span></label>
+            </div>
+          </div>
+
+          <!-- Diet -->
+          <div class="filter-group">
+            <div class="filter-group__title">Dietary <i class="fas fa-chevron-down"></i></div>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="radio" name="filter-diet" data-filter="diet" value="Vegetarian"><span class="filter-option__label">🥕 Vegetarian</span></label>
+              <label class="filter-option"><input type="radio" name="filter-diet" data-filter="diet" value="Vegan"><span class="filter-option__label">🌱 Vegan</span></label>
+              <label class="filter-option"><input type="radio" name="filter-diet" data-filter="diet" value="Gluten-Free"><span class="filter-option__label">🌾 Gluten-Free</span></label>
+            </div>
+          </div>
+
+          <!-- Cook Time Slider -->
+          <div class="filter-group">
+            <div class="filter-group__title">Max Cook Time <i class="fas fa-chevron-down"></i></div>
+            <div class="filter-group__options">
+              <div class="filter-range">
+                <div class="filter-range__labels"><span>15 min</span><span>3 hours</span></div>
+                <input type="range" id="time-slider" class="filter-slider" min="15" max="180" value="180" step="15" aria-label="Maximum cook time" />
+                <div class="filter-range__value" id="time-slider-value">Any</div>
+              </div>
+            </div>
+          </div>
+
+        </aside><!-- /filter-sidebar -->
+
+        <!-- RECIPE GRID -->
+        <div>
+          <!-- Toolbar -->
+          <div class="recipes-toolbar">
+            <div class="recipes-toolbar__search recipes-search-bar">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input type="search" id="recipes-search-input" class="recipes-search-bar__input" placeholder="Search recipes..." autocomplete="off" aria-label="Search recipes" />
+              <button class="recipes-search-bar__clear" id="search-clear-btn" aria-label="Clear search"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="recipes-toolbar__right">
+              <button class="filter-mobile-toggle" id="filter-mobile-btn" aria-label="Open filters">
+                <i class="fas fa-sliders-h"></i> Filters
+              </button>
+              <select id="sort-select" class="sort-select" aria-label="Sort recipes">
+                <option value="newest">Newest First</option>
+                <option value="rating">Top Rated</option>
+                <option value="popular">Most Popular</option>
+                <option value="quickest">Quickest</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+              <span class="results-count" id="results-count" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Active filter tags -->
+          <div class="active-filters" id="active-filter-tags" aria-label="Active filters"></div>
+
+          <!-- Cards -->
+          <div class="recipes-grid stagger" id="recipes-grid" aria-label="Recipe results"></div>
+
+          <!-- Pagination -->
+          <nav class="pagination" id="pagination" aria-label="Recipe pages"></nav>
+        </div>
+
+      </div><!-- /recipes-layout -->
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">
+          <div class="footer__logo-icon"><i class="fas fa-utensils"></i></div>
+          <span class="footer__logo-text">Recipe<span>Hub</span></span>
+        </a>
+        <p class="footer__desc">Community-driven recipe sharing. Discover, cook, and share amazing meals.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="footer__social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <nav class="footer__col">
+        <h3 class="footer__col-title">Browse</h3>
+        <ul class="footer__links">
+          <li><a href="recipes.html?category=Breakfast" class="footer__link"><i class="fas fa-chevron-right"></i> Breakfast</a></li>
+          <li><a href="recipes.html?category=Dinner"    class="footer__link"><i class="fas fa-chevron-right"></i> Dinner</a></li>
+          <li><a href="recipes.html?category=Dessert"   class="footer__link"><i class="fas fa-chevron-right"></i> Desserts</a></li>
+          <li><a href="recipes.html?category=Vegan"     class="footer__link"><i class="fas fa-chevron-right"></i> Vegan</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col">
+        <h3 class="footer__col-title">Community</h3>
+        <ul class="footer__links">
+          <li><a href="submit.html"  class="footer__link"><i class="fas fa-chevron-right"></i> Share a Recipe</a></li>
+          <li><a href="profile.html" class="footer__link"><i class="fas fa-chevron-right"></i> My Profile</a></li>
+          <li><a href="index.html"   class="footer__link"><i class="fas fa-chevron-right"></i> Home</a></li>
+        </ul>
+      </nav>
+      <div class="footer__newsletter">
+        <h3 class="footer__col-title">Newsletter</h3>
+        <p>Get weekly recipe picks in your inbox.</p>
+        <form class="footer__newsletter-form" novalidate>
+          <input type="email" class="footer__newsletter-input" placeholder="Your email" />
+          <button type="submit" class="footer__newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2025 <a href="index.html">RecipeHub</a>. Built for BIT Web Technology Assignment.</p>
+      <nav class="footer__bottom-links">
+        <a href="#" class="footer__bottom-link">Privacy</a>
+        <a href="#" class="footer__bottom-link">Terms</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile Filter Overlay -->
+<div id="filter-overlay" class="filter-mobile-overlay" aria-hidden="true"></div>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal__close" id="auth-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal__logo"><div class="modal__logo-icon"><i class="fas fa-utensils"></i></div><span class="modal__logo-text">RecipeHub</span></div>
+    <div class="modal__tabs" role="tablist">
+      <button class="modal__tab active" data-tab="login" role="tab" aria-selected="true">Login</button>
+      <button class="modal__tab" data-tab="register" role="tab" aria-selected="false">Register</button>
+    </div>
+    <div id="login-panel" role="tabpanel">
+      <h3 id="modal-title">Welcome back!</h3><p class="subtitle">Sign in to your account.</p>
+      <form id="login-form" novalidate>
+        <div class="form-group"><label class="form-label" for="login-email">Email <span class="required">*</span></label><input type="email" id="login-email" class="form-control" placeholder="you@example.com" /></div>
+        <div class="form-group"><label class="form-label" for="login-password">Password <span class="required">*</span></label><input type="password" id="login-password" class="form-control" placeholder="Your password" /></div>
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+    </div>
+    <div id="register-panel" style="display:none" role="tabpanel">
+      <h3>Create Account</h3><p class="subtitle">Join the community for free.</p>
+      <form id="register-form" novalidate>
+        <div class="form-group"><label class="form-label" for="register-name">Full Name <span class="required">*</span></label><input type="text" id="register-name" class="form-control" placeholder="Your name" /></div>
+        <div class="form-group"><label class="form-label" for="register-email">Email <span class="required">*</span></label><input type="email" id="register-email" class="form-control" placeholder="you@example.com" /></div>
+        <div class="form-group"><label class="form-label" for="register-password">Password <span class="required">*</span></label><input type="password" id="register-password" class="form-control" placeholder="Min 8 characters" /></div>
+        <div class="form-group"><label class="form-label" for="register-confirm">Confirm Password <span class="required">*</span></label><input type="password" id="register-confirm" class="form-control" placeholder="Repeat password" /></div>
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/recipes.js"></script>
+</body>
+</html>

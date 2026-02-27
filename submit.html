@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Share your recipe with the RecipeHub community." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>Submit a Recipe — RecipeHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/form.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/submit.css" />
+</head>
+<body>
+
+<div id="page-loader" class="page-loader"><div class="loader-logo"><i class="fas fa-utensils"></i><span>RecipeHub</span></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner">
+      <a href="index.html" class="navbar__logo"><div class="navbar__logo-icon"><i class="fas fa-utensils"></i></div><span class="navbar__logo-text">Recipe<span>Hub</span></span></a>
+      <ul class="navbar__nav" role="list">
+        <li><a href="index.html"   class="navbar__link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="recipes.html" class="navbar__link"><i class="fas fa-book-open"></i> Recipes</a></li>
+        <li><a href="submit.html"  class="navbar__link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+        <li><a href="profile.html" class="navbar__link"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <div class="navbar__auth"><button class="btn btn-ghost btn-sm" id="login-btn">Login</button><button class="btn btn-primary btn-sm" id="register-btn"><i class="fas fa-user-plus"></i> Register</button></div>
+        <div class="navbar__user"><a href="profile.html" class="navbar__user-avatar">RS</a></div>
+        <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<nav class="navbar__mobile-menu"><ul class="navbar__mobile-links" role="list"><li><a href="index.html" class="navbar__mobile-link"><i class="fas fa-home"></i> Home</a></li><li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i> Recipes</a></li><li><a href="submit.html" class="navbar__mobile-link"><i class="fas fa-plus-circle"></i> Submit</a></li><li><a href="profile.html" class="navbar__mobile-link"><i class="fas fa-user"></i> Profile</a></li></ul><div class="navbar__mobile-actions" id="mobile-auth-section"><button class="btn btn-outline w-100" id="mobile-login-btn">Login</button><button class="btn btn-primary w-100" id="mobile-register-btn">Create Account</button></div></nav>
+
+<main class="submit-page">
+
+  <!-- BANNER -->
+  <div class="submit-banner">
+    <div class="container">
+      <h1>Share Your Recipe</h1>
+      <p>Contribute to our community. Your recipe could become someone's new favourite meal.</p>
+    </div>
+  </div>
+
+  <div class="submit-content">
+    <div class="container">
+
+      <!-- Progress Indicator -->
+      <nav class="step-progress" aria-label="Form progress">
+        <div class="step-progress__item active"><div class="step-progress__circle">1</div><span class="step-progress__label">Basic Info</span></div>
+        <div class="step-progress__item"><div class="step-progress__circle">2</div><span class="step-progress__label">Ingredients</span></div>
+        <div class="step-progress__item"><div class="step-progress__circle">3</div><span class="step-progress__label">Instructions</span></div>
+        <div class="step-progress__item"><div class="step-progress__circle">4</div><span class="step-progress__label">Review</span></div>
+      </nav>
+
+      <div id="submit-form-wrap">
+        <div class="submit-layout">
+
+          <!-- FORM -->
+          <div>
+
+            <!-- STEP 1: Basic Info -->
+            <div class="submit-step-panel active" id="step-1">
+              <div class="form-section">
+                <div class="form-section__header">
+                  <h3><i class="fas fa-info-circle" style="color:var(--color-primary)"></i> Basic Information</h3>
+                  <p>Tell us about your recipe.</p>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="form-group">
+                  <label class="form-label">Recipe Photo <span class="optional">(optional)</span></label>
+                  <div id="image-upload-area" class="image-upload-area" role="button" tabindex="0" aria-label="Upload recipe image">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Upload a Photo</h4>
+                    <p>Drag & drop or click to browse. JPG, PNG up to 5MB.</p>
+                  </div>
+                  <div class="image-preview-wrap" id="preview-image-wrap">
+                    <img src="" alt="Recipe preview" />
+                    <button type="button" class="image-preview-wrap__remove" aria-label="Remove image"><i class="fas fa-times"></i></button>
+                  </div>
+                  <input type="file" id="recipe-image-input" accept="image/*" style="display:none" aria-hidden="true" />
+                </div>
+
+                <!-- Title -->
+                <div class="form-group">
+                  <label class="form-label" for="recipe-title">Recipe Title <span class="required">*</span></label>
+                  <input type="text" id="recipe-title" class="form-control" placeholder="e.g. Grandma's Chicken Momo" maxlength="100" aria-required="true" />
+                  <div class="char-counter" id="title-count">0/100</div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                  <label class="form-label" for="recipe-desc">Description <span class="required">*</span></label>
+                  <textarea id="recipe-desc" class="form-control" rows="3" placeholder="Describe your recipe in a few sentences..." maxlength="500" aria-required="true"></textarea>
+                  <div class="char-counter" id="desc-count">0/500</div>
+                </div>
+
+                <!-- Category + Cuisine -->
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="recipe-category">Category <span class="required">*</span></label>
+                    <select id="recipe-category" class="form-control" aria-required="true">
+                      <option value="">Select category...</option>
+                      <option>Breakfast</option><option>Lunch</option><option>Dinner</option>
+                      <option>Dessert</option><option>Drinks</option><option>Snack</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="recipe-cuisine">Cuisine</label>
+                    <select id="recipe-cuisine" class="form-control">
+                      <option value="">Select cuisine...</option>
+                      <option>Nepali</option><option>Italian</option><option>Thai</option>
+                      <option>American</option><option>French</option><option>Indian</option><option>Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Difficulty -->
+                <div class="form-group">
+                  <label class="form-label">Difficulty</label>
+                  <div class="pill-toggle-group">
+                    <label class="pill-toggle"><input type="radio" name="difficulty" value="Beginner" checked /><span class="pill-toggle__label">🟢 Beginner</span></label>
+                    <label class="pill-toggle"><input type="radio" name="difficulty" value="Intermediate" /><span class="pill-toggle__label">🟡 Intermediate</span></label>
+                    <label class="pill-toggle"><input type="radio" name="difficulty" value="Advanced" /><span class="pill-toggle__label">🔴 Advanced</span></label>
+                  </div>
+                </div>
+
+                <!-- Times + Servings + Calories -->
+                <div class="form-grid-2">
+                  <div class="form-group"><label class="form-label" for="recipe-prep">Prep Time (min)</label><input type="number" id="recipe-prep" class="form-control" placeholder="e.g. 20" min="0" max="600" /></div>
+                  <div class="form-group"><label class="form-label" for="recipe-cook">Cook Time (min)</label><input type="number" id="recipe-cook" class="form-control" placeholder="e.g. 40" min="0" max="600" /></div>
+                  <div class="form-group"><label class="form-label" for="recipe-servings">Servings</label><input type="number" id="recipe-servings" class="form-control" placeholder="e.g. 4" min="1" max="100" /></div>
+                  <div class="form-group"><label class="form-label" for="recipe-calories">Calories (kcal)</label><input type="number" id="recipe-calories" class="form-control" placeholder="e.g. 380" min="0" /></div>
+                </div>
+
+                <!-- Dietary Tags -->
+                <div class="form-group">
+                  <label class="form-label">Dietary Tags <span class="optional">(select all that apply)</span></label>
+                  <div class="form-check-group">
+                    <label class="form-check"><input type="checkbox" value="Vegetarian" /><span class="form-check__label">🥕 Vegetarian</span></label>
+                    <label class="form-check"><input type="checkbox" value="Vegan" /><span class="form-check__label">🌱 Vegan</span></label>
+                    <label class="form-check"><input type="checkbox" value="Gluten-Free" /><span class="form-check__label">🌾 Gluten-Free</span></label>
+                    <label class="form-check"><input type="checkbox" value="Dairy-Free" /><span class="form-check__label">🥛 Dairy-Free</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-nav">
+                <span style="font-size:var(--text-sm);color:var(--color-muted)">Step 1 of 4</span>
+                <button type="button" class="btn btn-primary step-next-btn">Next: Ingredients <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Ingredients -->
+            <div class="submit-step-panel" id="step-2">
+              <div class="form-section">
+                <div class="form-section__header">
+                  <h3><i class="fas fa-list" style="color:var(--color-primary)"></i> Ingredients</h3>
+                  <p>Add all ingredients with quantities and units.</p>
+                </div>
+                <div id="ingredients-rows">
+                  <div class="ingredient-row">
+                    <div class="form-group" style="margin:0"><input type="text" class="form-control ing-name" placeholder="Ingredient name" /></div>
+                    <div class="form-group" style="margin:0"><input type="text" class="form-control ing-qty" placeholder="Qty" /></div>
+                    <div class="form-group" style="margin:0"><input type="text" class="form-control ing-unit" placeholder="Unit" /></div>
+                    <button type="button" class="ingredient-row__remove ing-remove-btn" aria-label="Remove"><i class="fas fa-times"></i></button>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline" id="add-ingredient-btn" style="margin-top:var(--space-4)">
+                  <i class="fas fa-plus"></i> Add Ingredient
+                </button>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn btn-outline step-prev-btn"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary step-next-btn">Next: Instructions <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 3: Instructions -->
+            <div class="submit-step-panel" id="step-3">
+              <div class="form-section">
+                <div class="form-section__header">
+                  <h3><i class="fas fa-list-ol" style="color:var(--color-primary)"></i> Instructions</h3>
+                  <p>Add step-by-step cooking instructions.</p>
+                </div>
+                <div id="steps-rows">
+                  <div class="step-row">
+                    <div class="step-row__number">1</div>
+                    <div class="step-row__content form-group" style="margin:0">
+                      <textarea class="form-control step-instruction" rows="2" placeholder="Describe this step in detail..."></textarea>
+                    </div>
+                    <button type="button" class="step-row__remove step-remove-btn" aria-label="Remove step"><i class="fas fa-times"></i></button>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline" id="add-step-btn" style="margin-top:var(--space-4)">
+                  <i class="fas fa-plus"></i> Add Step
+                </button>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn btn-outline step-prev-btn"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary step-next-btn">Review & Submit <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 4: Review -->
+            <div class="submit-step-panel" id="step-4">
+              <div class="form-section">
+                <div class="form-section__header">
+                  <h3><i class="fas fa-check-circle" style="color:var(--color-success)"></i> Ready to Publish?</h3>
+                  <p>Review the preview on the right. Once published, your recipe will be visible to the entire community.</p>
+                </div>
+                <div class="form-check" style="margin-bottom:var(--space-4)">
+                  <input type="checkbox" id="terms-check" />
+                  <label class="form-check__label" for="terms-check">I confirm this is my original recipe and I agree to share it with the RecipeHub community.</label>
+                </div>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn btn-outline step-prev-btn"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary" id="submit-recipe-btn"><i class="fas fa-paper-plane"></i> Publish Recipe</button>
+              </div>
+            </div>
+
+          </div><!-- /form left -->
+
+          <!-- PREVIEW SIDEBAR -->
+          <aside class="submit-preview" aria-label="Recipe preview">
+            <p style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-muted);margin-bottom:var(--space-3)">Live Preview</p>
+            <div class="submit-preview__card">
+              <div class="submit-preview__image" id="submit-preview-image">
+                <span style="font-size:3rem;color:var(--color-border)">🍽️</span>
+              </div>
+              <div class="submit-preview__body">
+                <div class="submit-preview__title placeholder" id="preview-title">Your Recipe Title</div>
+                <div class="submit-preview__stats">
+                  <span class="submit-preview__stat"><i class="fas fa-clock"></i> <span id="preview-time">— min</span></span>
+                  <span class="submit-preview__stat"><i class="fas fa-users"></i> <span id="preview-servings">—</span></span>
+                  <span class="submit-preview__stat"><i class="fas fa-fire"></i> <span id="preview-calories">—</span> cal</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div><!-- /submit-layout -->
+      </div><!-- /submit-form-wrap -->
+
+      <!-- SUCCESS SCREEN -->
+      <div class="submit-success" id="submit-success">
+        <div class="submit-success__icon"><i class="fas fa-check"></i></div>
+        <h2>Recipe Published! 🎉</h2>
+        <p>Your recipe has been submitted to the community. Thank you for sharing!</p>
+        <div class="submit-success__actions">
+          <a href="recipes.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Browse Recipes</a>
+          <a href="submit.html"  class="btn btn-outline"><i class="fas fa-plus"></i> Submit Another</a>
+        </div>
+      </div>
+
+    </div><!-- /container -->
+  </div><!-- /submit-content -->
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><div class="footer__logo-icon"><i class="fas fa-utensils"></i></div><span class="footer__logo-text">Recipe<span>Hub</span></span></a><p class="footer__desc">Share amazing recipes with our food-loving community.</p></div>
+      <nav class="footer__col"><h3 class="footer__col-title">Links</h3><ul class="footer__links"><li><a href="index.html" class="footer__link"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="recipes.html" class="footer__link"><i class="fas fa-chevron-right"></i> Recipes</a></li><li><a href="profile.html" class="footer__link"><i class="fas fa-chevron-right"></i> Profile</a></li></ul></nav>
+      <div class="footer__newsletter"><h3 class="footer__col-title">Newsletter</h3><p>Weekly recipes in your inbox.</p><form class="footer__newsletter-form" novalidate><input type="email" class="footer__newsletter-input" placeholder="Your email" /><button type="submit" class="footer__newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button></form></div>
+    </div>
+    <div class="footer__bottom"><p class="footer__copyright">&copy; 2025 <a href="index.html">RecipeHub</a>.</p></div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal__close" id="auth-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal__logo"><div class="modal__logo-icon"><i class="fas fa-utensils"></i></div><span class="modal__logo-text">RecipeHub</span></div>
+    <div class="modal__tabs" role="tablist"><button class="modal__tab active" data-tab="login" role="tab">Login</button><button class="modal__tab" data-tab="register" role="tab">Register</button></div>
+    <div id="login-panel" role="tabpanel"><h3 id="modal-title">Welcome back!</h3><p class="subtitle">Sign in to share your recipe.</p><form id="login-form" novalidate><div class="form-group"><label class="form-label" for="login-email">Email <span class="required">*</span></label><input type="email" id="login-email" class="form-control" placeholder="you@example.com" /></div><div class="form-group"><label class="form-label" for="login-password">Password <span class="required">*</span></label><input type="password" id="login-password" class="form-control" placeholder="Your password" /></div><button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Sign In</button></form></div>
+    <div id="register-panel" style="display:none" role="tabpanel"><h3>Create Account</h3><p class="subtitle">Join free and start sharing.</p><form id="register-form" novalidate><div class="form-group"><label class="form-label" for="register-name">Full Name <span class="required">*</span></label><input type="text" id="register-name" class="form-control" placeholder="Your name" /></div><div class="form-group"><label class="form-label" for="register-email">Email <span class="required">*</span></label><input type="email" id="register-email" class="form-control" placeholder="you@example.com" /></div><div class="form-group"><label class="form-label" for="register-password">Password <span class="required">*</span></label><input type="password" id="register-password" class="form-control" placeholder="Min 8 characters" /></div><div class="form-group"><label class="form-label" for="register-confirm">Confirm <span class="required">*</span></label><input type="password" id="register-confirm" class="form-control" placeholder="Repeat password" /></div><button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-user-plus"></i> Create Account</button></form></div>
+  </div>
+</div>
+
+<button class="scroll-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/submit.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>404 — Page Not Found | RecipeHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <style>
+    .error-page { min-height: calc(100vh - var(--navbar-height)); display:flex; align-items:center; justify-content:center; padding: var(--space-16) var(--space-6); padding-top:calc(var(--navbar-height) + var(--space-16)); text-align:center; }
+    .error-page__code { font-family:var(--font-display); font-size:8rem; font-weight:700; color:var(--color-primary); line-height:1; opacity:0.15; position:absolute; }
+    .error-page__inner { position:relative; z-index:1; }
+    .error-page__emoji { font-size:5rem; display:block; margin-bottom:var(--space-6); animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .error-page h1 { font-size:var(--text-3xl); margin-bottom:var(--space-4); }
+    .error-page p  { font-size:var(--text-md); color:var(--color-mid); max-width:400px; margin:0 auto var(--space-8); }
+    .error-page__actions { display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+
+<div id="page-loader" class="page-loader"><div class="loader-logo"><i class="fas fa-utensils"></i><span>RecipeHub</span></div></div>
+
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner">
+      <a href="index.html" class="navbar__logo"><div class="navbar__logo-icon"><i class="fas fa-utensils"></i></div><span class="navbar__logo-text">Recipe<span>Hub</span></span></a>
+      <ul class="navbar__nav" role="list">
+        <li><a href="index.html"   class="navbar__link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="recipes.html" class="navbar__link"><i class="fas fa-book-open"></i> Recipes</a></li>
+        <li><a href="submit.html"  class="navbar__link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+        <li><a href="profile.html" class="navbar__link"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <div class="navbar__auth"><button class="btn btn-ghost btn-sm" id="login-btn">Login</button><button class="btn btn-primary btn-sm" id="register-btn">Register</button></div>
+        <div class="navbar__user"><a href="profile.html" class="navbar__user-avatar">RS</a></div>
+        <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<nav class="navbar__mobile-menu"><ul class="navbar__mobile-links" role="list"><li><a href="index.html" class="navbar__mobile-link"><i class="fas fa-home"></i> Home</a></li><li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i> Recipes</a></li></ul><div class="navbar__mobile-actions" id="mobile-auth-section"><button class="btn btn-outline w-100" id="mobile-login-btn">Login</button><button class="btn btn-primary w-100" id="mobile-register-btn">Create Account</button></div></nav>
+
+<main>
+  <div class="error-page">
+    <div class="error-page__code" aria-hidden="true">404</div>
+    <div class="error-page__inner">
+      <span class="error-page__emoji" role="img" aria-label="Sad plate">🍽️</span>
+      <h1>Page Not Found</h1>
+      <p>Looks like this recipe doesn't exist — or it was moved. Let's get you back to something delicious.</p>
+      <div class="error-page__actions">
+        <a href="index.html"   class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Go Home</a>
+        <a href="recipes.html" class="btn btn-outline btn-lg"><i class="fas fa-book-open"></i> Browse Recipes</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:var(--space-6)">
+      <p class="footer__copyright">&copy; 2025 <a href="index.html">RecipeHub</a>.</p>
+      <nav class="footer__bottom-links"><a href="index.html" class="footer__bottom-link">Home</a><a href="recipes.html" class="footer__bottom-link">Recipes</a></nav>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

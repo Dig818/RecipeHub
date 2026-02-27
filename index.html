@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <!-- ============================================================
+       index.html — RecipeHub Home Page
+       Author   : RecipeHub Project
+       Purpose  : Main landing page — hero, categories, featured
+                  recipes, how-it-works, newsletter CTA, footer
+       Tech     : HTML5, CSS3, JavaScript, jQuery
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="RecipeHub — Discover, share and cook amazing recipes from around the world. Join our community of food lovers." />
+  <meta name="keywords" content="recipes, cooking, food, Nepali recipes, share recipes, cooking community" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>RecipeHub — Cook Something Amazing Today</title>
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- RecipeHub Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css"     />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/cards.css"     />
+  <link rel="stylesheet" href="assets/css/form.css"      />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/home.css"   />
+</head>
+
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  PAGE LOADER                                            ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<div id="page-loader" class="page-loader" role="status" aria-label="Loading RecipeHub">
+  <div class="loader-logo">
+    <i class="fas fa-utensils"></i>
+    <span>RecipeHub</span>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  NAVIGATION BAR                                         ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner" aria-label="Main navigation">
+
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="RecipeHub — Go to homepage">
+        <div class="navbar__logo-icon" aria-hidden="true">
+          <i class="fas fa-utensils"></i>
+        </div>
+        <span class="navbar__logo-text">Recipe<span>Hub</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="navbar__nav" role="list">
+        <li>
+          <a href="index.html" class="navbar__link active" aria-current="page">
+            <i class="fas fa-home" aria-hidden="true"></i> Home
+          </a>
+        </li>
+        <li>
+          <a href="recipes.html" class="navbar__link">
+            <i class="fas fa-book-open" aria-hidden="true"></i> Recipes
+          </a>
+        </li>
+        <li>
+          <a href="submit.html" class="navbar__link">
+            <i class="fas fa-plus-circle" aria-hidden="true"></i> Submit
+          </a>
+        </li>
+        <li>
+          <a href="profile.html" class="navbar__link">
+            <i class="fas fa-user" aria-hidden="true"></i> Profile
+          </a>
+        </li>
+      </ul>
+
+      <!-- Right: Dark Toggle + Auth Buttons -->
+      <div class="navbar__actions">
+        <!-- Dark Mode Toggle -->
+        <button class="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+
+        <!-- Auth Buttons (shown when logged out) -->
+        <div class="navbar__auth" aria-label="Authentication">
+          <button class="btn btn-ghost btn-sm" id="login-btn" aria-haspopup="dialog">
+            Login
+          </button>
+          <button class="btn btn-primary btn-sm" id="register-btn" aria-haspopup="dialog">
+            <i class="fas fa-user-plus" aria-hidden="true"></i> Register
+          </button>
+        </div>
+
+        <!-- User Avatar (shown when logged in) -->
+        <div class="navbar__user" aria-label="User account" role="navigation">
+          <a href="profile.html" class="navbar__user-avatar" aria-label="Go to your profile">RS</a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button class="navbar__hamburger" aria-label="Open navigation menu"
+                aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </nav><!-- /navbar__inner -->
+  </div><!-- /container -->
+</header>
+
+<!-- Mobile Menu Drawer -->
+<nav id="mobile-menu" class="navbar__mobile-menu" aria-label="Mobile navigation">
+  <ul class="navbar__mobile-links" role="list">
+    <li><a href="index.html"   class="navbar__mobile-link active"><i class="fas fa-home"></i>      Home</a></li>
+    <li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i>   Recipes</a></li>
+    <li><a href="submit.html"  class="navbar__mobile-link"><i class="fas fa-plus-circle"></i> Submit a Recipe</a></li>
+    <li><a href="profile.html" class="navbar__mobile-link"><i class="fas fa-user"></i>        My Profile</a></li>
+  </ul>
+  <div class="navbar__mobile-actions" id="mobile-auth-section">
+    <!-- Dynamically filled by main.js based on auth state -->
+    <button class="btn btn-outline w-100" id="mobile-login-btn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+    <button class="btn btn-primary w-100" id="mobile-register-btn">
+      <i class="fas fa-user-plus"></i> Create Account
+    </button>
+  </div>
+</nav>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  MAIN CONTENT                                           ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<main id="main-content" class="page-content">
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 1: HERO
+  ══════════════════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <!-- Background decorative elements -->
+    <div class="hero__bg"      aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero__inner">
+
+        <!-- Left Content -->
+        <div class="hero__content">
+          <div class="hero__label" aria-hidden="true">
+            <i class="fas fa-fire"></i>
+            Featured Community Recipes
+          </div>
+
+          <h1 class="hero__title" id="hero-heading">
+            Cook Something<br>
+            <span class="highlight">Amazing</span> Today
+          </h1>
+
+          <p class="hero__desc">
+            Discover thousands of hand-crafted recipes from home cooks and chefs
+            around the world. From quick weeknight dinners to weekend baking
+            adventures — your next favourite meal starts here.
+          </p>
+
+          <!-- Hero Search Bar -->
+          <form class="hero__search" id="hero-search-form" role="search" aria-label="Search recipes">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="hero-search-input"
+              class="hero__search-input"
+              placeholder="Search recipes, cuisines, ingredients..."
+              aria-label="Search recipes"
+              autocomplete="off"
+            />
+            <button type="submit" class="hero__search-btn" id="hero-search-btn" aria-label="Submit search">
+              Search
+            </button>
+          </form>
+
+          <!-- Quick-search tags -->
+          <div class="hero__tags" aria-label="Popular searches">
+            <span class="hero__tags-label">Trending:</span>
+            <a href="recipes.html?category=Dinner"   class="hero__tag" data-query="Nepali">🍛 Nepali</a>
+            <a href="recipes.html?category=Vegan"    class="hero__tag" data-query="Vegan">🥦 Vegan</a>
+            <a href="recipes.html?category=Dessert"  class="hero__tag" data-query="Dessert">🧁 Dessert</a>
+            <a href="recipes.html?category=Breakfast"class="hero__tag" data-query="Quick">⚡ Quick &lt;30min</a>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="hero__ctas" style="margin-top:2rem">
+            <a href="recipes.html" class="btn btn-primary btn-lg">
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              Browse Recipes
+            </a>
+            <a href="submit.html" class="btn btn-outline btn-lg">
+              <i class="fas fa-plus" aria-hidden="true"></i>
+              Share Your Recipe
+            </a>
+          </div>
+        </div><!-- /hero__content -->
+
+        <!-- Right Visual — Decorative Recipe Card Stack -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__card-stack">
+            <!-- Decorative background -->
+            <div class="hero__bg-card"></div>
+
+            <!-- Main card -->
+            <div class="hero__main-card">
+              <div class="hero__main-card-image">🍛</div>
+              <div class="hero__main-card-body">
+                <h3 class="hero__main-card-title">Dal Bhat Tarkari</h3>
+                <div class="hero__main-card-meta">
+                  <div class="stars" aria-label="Rating 4.8 out of 5">
+                    <i class="fas fa-star star filled"></i>
+                    <i class="fas fa-star star filled"></i>
+                    <i class="fas fa-star star filled"></i>
+                    <i class="fas fa-star star filled"></i>
+                    <i class="fas fa-star star filled"></i>
+                    <span class="rating-text">4.8 (142)</span>
+                  </div>
+                  <div class="hero__main-card-stats">
+                    <span class="hero__main-card-stat"><i class="fas fa-clock"></i> 60m</span>
+                    <span class="hero__main-card-stat"><i class="fas fa-fire"></i> 380 cal</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating mini card 1 -->
+            <div class="hero__float-card hero__float-card--1">
+              <div class="hero__float-icon">🥟</div>
+              <div class="hero__float-info">
+                <div class="hero__float-title">Chicken Momo</div>
+                <div class="hero__float-sub">⭐ 4.9 · 20 min</div>
+              </div>
+            </div>
+
+            <!-- Floating mini card 2 -->
+            <div class="hero__float-card hero__float-card--2">
+              <div class="hero__float-icon">🌿</div>
+              <div class="hero__float-info">
+                <div class="hero__float-title">1,200+ Recipes</div>
+                <div class="hero__float-sub">From 850+ Members</div>
+              </div>
+            </div>
+          </div><!-- /hero__card-stack -->
+        </div><!-- /hero__visual -->
+
+      </div><!-- /hero__inner -->
+    </div><!-- /container -->
+
+    <!-- Stats Bar below hero -->
+    <div class="hero__stats container" id="hero-stats">
+      <div class="hero__stats-inner">
+        <div class="hero__stat-item">
+          <span class="hero__stat-number" id="stat-recipes">0<span class="plus">+</span></span>
+          <span class="hero__stat-label">Recipes</span>
+        </div>
+        <div class="hero__stat-divider" aria-hidden="true"></div>
+        <div class="hero__stat-item">
+          <span class="hero__stat-number" id="stat-members">0<span class="plus">+</span></span>
+          <span class="hero__stat-label">Members</span>
+        </div>
+        <div class="hero__stat-divider" aria-hidden="true"></div>
+        <div class="hero__stat-item">
+          <span class="hero__stat-number" id="stat-reviews">0<span class="plus">+</span></span>
+          <span class="hero__stat-label">Reviews</span>
+        </div>
+        <div class="hero__stat-divider" aria-hidden="true"></div>
+        <div class="hero__stat-item">
+          <span class="hero__stat-number" id="stat-cuisines">0</span>
+          <span class="hero__stat-label">Cuisines</span>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- /hero -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 2: BROWSE BY CATEGORY
+  ══════════════════════════════════════════════════════════ -->
+  <section class="categories section" aria-labelledby="categories-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="label" aria-hidden="true">What are you craving?</span>
+        <h2 id="categories-heading">Browse by Category</h2>
+        <p>Explore our curated recipe collections across every meal of the day.</p>
+      </div>
+
+      <!-- Injected by home.js renderCategories() -->
+      <div class="categories__grid stagger" id="categories-grid" role="list" aria-label="Recipe categories">
+        <!-- Placeholder while JS loads -->
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+        <div class="skeleton" style="height:140px;border-radius:12px"></div>
+      </div>
+
+    </div>
+  </section><!-- /categories -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 3: FEATURED RECIPES
+  ══════════════════════════════════════════════════════════ -->
+  <section class="featured section-sm" aria-labelledby="featured-heading">
+    <div class="container">
+
+      <div class="featured__header">
+        <div>
+          <span class="label" aria-hidden="true">Handpicked by our community</span>
+          <h2 id="featured-heading" style="margin-bottom:0">Featured Recipes This Week</h2>
+        </div>
+        <a href="recipes.html" class="btn btn-outline" aria-label="View all recipes">
+          View All <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Injected by home.js renderFeaturedRecipes() -->
+      <div class="featured__grid stagger" id="featured-grid" aria-label="Featured recipes">
+        <!-- Skeletons while loading -->
+        <div class="skeleton" style="height:360px;border-radius:16px"></div>
+        <div class="skeleton" style="height:360px;border-radius:16px"></div>
+        <div class="skeleton" style="height:360px;border-radius:16px"></div>
+        <div class="skeleton" style="height:360px;border-radius:16px"></div>
+      </div>
+
+    </div>
+  </section><!-- /featured -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 4: HOW IT WORKS
+  ══════════════════════════════════════════════════════════ -->
+  <section class="how-it-works section" aria-labelledby="how-heading">
+    <div class="container">
+
+      <div class="section-header text-center">
+        <span class="label" aria-hidden="true">Simple as 1, 2, 3</span>
+        <h2 id="how-heading">How RecipeHub Works</h2>
+        <p style="margin: 0 auto">Join our community and start discovering or sharing amazing recipes in minutes.</p>
+      </div>
+
+      <div class="how-it-works__grid stagger" aria-label="Steps to use RecipeHub">
+        <!-- Step 1 -->
+        <div class="how-step" data-reveal>
+          <div class="how-step__number" aria-hidden="true">01</div>
+          <div class="how-step__icon" aria-hidden="true">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <h4>Create Your Account</h4>
+          <p>
+            Sign up for free in under a minute. No subscription or credit card needed —
+            just your email and a passion for good food.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="how-step" data-reveal>
+          <div class="how-step__number" aria-hidden="true">02</div>
+          <div class="how-step__icon" aria-hidden="true">
+            <i class="fas fa-search"></i>
+          </div>
+          <h4>Discover &amp; Save Recipes</h4>
+          <p>
+            Browse 1,200+ recipes with powerful filters. Save your favourites with
+            one click, plan your weekly meals, and build your personal cookbook.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="how-step" data-reveal>
+          <div class="how-step__number" aria-hidden="true">03</div>
+          <div class="how-step__icon" aria-hidden="true">
+            <i class="fas fa-share-alt"></i>
+          </div>
+          <h4>Share Your Creations</h4>
+          <p>
+            Have a recipe the world needs to taste? Upload it in minutes with our
+            step-by-step submission form and share it with 850+ community members.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- /how-it-works -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 5: NEWSLETTER CTA STRIP
+  ══════════════════════════════════════════════════════════ -->
+  <section class="newsletter-strip" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <div class="newsletter-strip__inner">
+
+        <div class="newsletter-strip__content">
+          <h2 id="newsletter-heading">Never Miss a New Recipe</h2>
+          <p>Get the best recipes from our community delivered to your inbox every week.</p>
+        </div>
+
+        <form class="newsletter-strip__form" id="newsletter-strip-form"
+              aria-label="Newsletter signup" novalidate>
+          <label for="newsletter-strip-email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="newsletter-strip-email"
+            class="newsletter-strip__input"
+            placeholder="Enter your email address..."
+            autocomplete="email"
+            required
+            aria-required="true"
+          />
+          <button type="submit" class="newsletter-strip__btn" id="newsletter-strip-btn">
+            Subscribe →
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section><!-- /newsletter-strip -->
+
+</main><!-- /main-content -->
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  FOOTER                                                 ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+
+      <!-- Brand Column -->
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="RecipeHub homepage">
+          <div class="footer__logo-icon" aria-hidden="true">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <span class="footer__logo-text">Recipe<span>Hub</span></span>
+        </a>
+        <p class="footer__desc">
+          A community-driven recipe sharing platform where food lovers discover,
+          create, and share the meals that matter most. Built with love in Kathmandu.
+        </p>
+        <div class="footer__social" aria-label="Social media links">
+          <a href="#" class="footer__social-link" aria-label="Follow us on Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Follow us on Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Follow us on Twitter / X">
+            <i class="fab fa-x-twitter" aria-hidden="true"></i>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Subscribe on YouTube">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <nav class="footer__col" aria-labelledby="footer-explore-heading">
+        <h3 class="footer__col-title" id="footer-explore-heading">Explore</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="recipes.html?category=Breakfast"  class="footer__link"><i class="fas fa-chevron-right"></i> Breakfast</a></li>
+          <li><a href="recipes.html?category=Lunch"      class="footer__link"><i class="fas fa-chevron-right"></i> Lunch</a></li>
+          <li><a href="recipes.html?category=Dinner"     class="footer__link"><i class="fas fa-chevron-right"></i> Dinner</a></li>
+          <li><a href="recipes.html?category=Dessert"    class="footer__link"><i class="fas fa-chevron-right"></i> Desserts</a></li>
+          <li><a href="recipes.html?category=Vegan"      class="footer__link"><i class="fas fa-chevron-right"></i> Vegan</a></li>
+          <li><a href="recipes.html"                     class="footer__link"><i class="fas fa-chevron-right"></i> All Recipes</a></li>
+        </ul>
+      </nav>
+
+      <!-- Community Links -->
+      <nav class="footer__col" aria-labelledby="footer-community-heading">
+        <h3 class="footer__col-title" id="footer-community-heading">Community</h3>
+        <ul class="footer__links" role="list">
+          <li><a href="submit.html"   class="footer__link"><i class="fas fa-chevron-right"></i> Share a Recipe</a></li>
+          <li><a href="profile.html"  class="footer__link"><i class="fas fa-chevron-right"></i> My Profile</a></li>
+          <li><a href="#" data-open-modal="register" class="footer__link"><i class="fas fa-chevron-right"></i> Join RecipeHub</a></li>
+          <li><a href="#"             class="footer__link"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="#"             class="footer__link"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Newsletter Column -->
+      <div class="footer__newsletter">
+        <h3 class="footer__col-title">Weekly Digest</h3>
+        <p>Get curated recipes and cooking tips delivered to your inbox every week.</p>
+        <form class="footer__newsletter-form" aria-label="Footer newsletter signup" novalidate>
+          <label for="footer-email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="footer-email"
+            class="footer__newsletter-input"
+            placeholder="Your email address"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="footer__newsletter-btn">
+            <i class="fas fa-paper-plane" aria-hidden="true"></i> Subscribe
+          </button>
+        </form>
+      </div>
+
+    </div><!-- /footer__top -->
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; 2025 <a href="index.html">RecipeHub</a>. Built with ❤️ for the BIT Web Technology assignment.
+      </p>
+      <nav class="footer__bottom-links" aria-label="Legal links">
+        <a href="#" class="footer__bottom-link">Privacy Policy</a>
+        <a href="#" class="footer__bottom-link">Terms of Use</a>
+        <a href="#" class="footer__bottom-link">Cookie Policy</a>
+      </nav>
+    </div>
+
+  </div><!-- /container -->
+</footer>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  LOGIN / REGISTER MODAL                                 ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<div id="auth-modal"
+     class="modal-overlay"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modal-title"
+     aria-describedby="modal-desc">
+
+  <div class="modal">
+    <!-- Close Button -->
+    <button class="modal__close" id="auth-modal-close" aria-label="Close dialog">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+
+    <!-- Logo -->
+    <div class="modal__logo">
+      <div class="modal__logo-icon" aria-hidden="true">
+        <i class="fas fa-utensils"></i>
+      </div>
+      <span class="modal__logo-text">RecipeHub</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="modal__tabs" role="tablist" aria-label="Authentication tabs">
+      <button class="modal__tab active" data-tab="login"
+              role="tab" aria-selected="true" aria-controls="login-panel">
+        Login
+      </button>
+      <button class="modal__tab" data-tab="register"
+              role="tab" aria-selected="false" aria-controls="register-panel">
+        Register
+      </button>
+    </div>
+
+    <!-- ── LOGIN PANEL ─────────────────────────────────────── -->
+    <div id="login-panel" role="tabpanel" aria-labelledby="login-tab">
+      <h3 id="modal-title">Welcome back!</h3>
+      <p class="subtitle" id="modal-desc">Sign in to access your saved recipes and profile.</p>
+
+      <form id="login-form" novalidate aria-label="Login form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">
+            Email Address <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="email"
+            id="login-email"
+            class="form-control"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">
+            Password <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="password"
+            id="login-password"
+            class="form-control"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center;margin-top:8px">
+          <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Sign In
+        </button>
+      </form>
+
+      <div class="modal__divider"><span>or</span></div>
+
+      <p style="text-align:center;font-size:var(--text-sm);color:var(--color-mid)">
+        Don't have an account?
+        <button class="modal__tab" data-tab="register"
+                style="color:var(--color-primary);font-weight:600;font-size:inherit;display:inline;background:none;border:none;cursor:pointer;padding:0">
+          Create one →
+        </button>
+      </p>
+    </div><!-- /login-panel -->
+
+    <!-- ── REGISTER PANEL ──────────────────────────────────── -->
+    <div id="register-panel" style="display:none" role="tabpanel" aria-labelledby="register-tab">
+      <h3>Join RecipeHub</h3>
+      <p class="subtitle">Create a free account and start sharing amazing recipes.</p>
+
+      <form id="register-form" novalidate aria-label="Registration form">
+        <div class="form-group">
+          <label class="form-label" for="register-name">
+            Full Name <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="register-name"
+            class="form-control"
+            placeholder="Your full name"
+            autocomplete="name"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="register-email">
+            Email Address <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="email"
+            id="register-email"
+            class="form-control"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="register-password">
+            Password <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="password"
+            id="register-password"
+            class="form-control"
+            placeholder="Minimum 8 characters"
+            autocomplete="new-password"
+            required
+            aria-required="true"
+            aria-describedby="pass-hint"
+          />
+          <div class="form-hint" id="pass-hint">
+            Must be 8+ characters with at least one uppercase letter and one number.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="register-confirm">
+            Confirm Password <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="password"
+            id="register-confirm"
+            class="form-control"
+            placeholder="Repeat your password"
+            autocomplete="new-password"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" style="justify-content:center;margin-top:8px">
+          <i class="fas fa-user-plus" aria-hidden="true"></i> Create Account
+        </button>
+      </form>
+
+      <div class="modal__divider"><span>or</span></div>
+
+      <p style="text-align:center;font-size:var(--text-sm);color:var(--color-mid)">
+        Already have an account?
+        <button class="modal__tab" data-tab="login"
+                style="color:var(--color-primary);font-weight:600;font-size:inherit;display:inline;background:none;border:none;cursor:pointer;padding:0">
+          Sign in →
+        </button>
+      </p>
+    </div><!-- /register-panel -->
+
+  </div><!-- /modal -->
+</div><!-- /auth-modal -->
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SCROLL TO TOP BUTTON                                   ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<button class="scroll-to-top" aria-label="Scroll back to top" title="Back to top">
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</button>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  SCRIPTS                                                ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- RecipeHub Scripts — ORDER MATTERS -->
+<script src="assets/js/utils.js"></script>  <!-- 1. Utilities first -->
+<script src="assets/js/data.js"></script>   <!-- 2. Data store -->
+<script src="assets/js/auth.js"></script>   <!-- 3. Auth module -->
+<script src="assets/js/main.js"></script>   <!-- Global shared handlers -->
+<script src="assets/js/home.js"></script>   <!-- Home page specific logic -->
+
+</body>
+</html>

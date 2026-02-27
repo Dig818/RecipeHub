@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your RecipeHub profile — manage recipes, bookmarks and settings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" />
+  <title>My Profile — RecipeHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dark-mode.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/form.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/profile.css" />
+</head>
+<body>
+
+<div id="page-loader" class="page-loader"><div class="loader-logo"><i class="fas fa-utensils"></i><span>RecipeHub</span></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+  <div class="container">
+    <nav class="navbar__inner">
+      <a href="index.html" class="navbar__logo"><div class="navbar__logo-icon"><i class="fas fa-utensils"></i></div><span class="navbar__logo-text">Recipe<span>Hub</span></span></a>
+      <ul class="navbar__nav" role="list">
+        <li><a href="index.html"   class="navbar__link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="recipes.html" class="navbar__link"><i class="fas fa-book-open"></i> Recipes</a></li>
+        <li><a href="submit.html"  class="navbar__link"><i class="fas fa-plus-circle"></i> Submit</a></li>
+        <li><a href="profile.html" class="navbar__link"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <button class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+        <div class="navbar__auth"><button class="btn btn-ghost btn-sm" id="login-btn">Login</button><button class="btn btn-primary btn-sm" id="register-btn"><i class="fas fa-user-plus"></i> Register</button></div>
+        <div class="navbar__user"><a href="profile.html" class="navbar__user-avatar">RS</a></div>
+        <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<nav class="navbar__mobile-menu"><ul class="navbar__mobile-links" role="list"><li><a href="index.html" class="navbar__mobile-link"><i class="fas fa-home"></i> Home</a></li><li><a href="recipes.html" class="navbar__mobile-link"><i class="fas fa-book-open"></i> Recipes</a></li><li><a href="submit.html" class="navbar__mobile-link"><i class="fas fa-plus-circle"></i> Submit</a></li><li><a href="profile.html" class="navbar__mobile-link"><i class="fas fa-user"></i> Profile</a></li></ul><div class="navbar__mobile-actions" id="mobile-auth-section"><button class="btn btn-outline w-100" id="mobile-login-btn">Login</button><button class="btn btn-primary w-100" id="mobile-register-btn">Create Account</button></div></nav>
+
+<main class="profile-page">
+
+  <!-- LOGGED OUT STATE -->
+  <div id="profile-logged-out" style="display:none;padding-top:var(--navbar-height)">
+    <div class="profile-login-prompt">
+      <i class="fas fa-user-lock"></i>
+      <h2>Login to View Your Profile</h2>
+      <p>Sign in or create a free account to manage your recipes, bookmarks and settings.</p>
+      <div class="profile-login-prompt__btns">
+        <button class="btn btn-primary btn-lg" data-open-modal="login"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="btn btn-outline btn-lg" data-open-modal="register"><i class="fas fa-user-plus"></i> Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGGED IN STATE -->
+  <div id="profile-content">
+
+    <!-- Header Banner -->
+    <section class="profile-header" aria-labelledby="profile-name">
+      <div class="container">
+        <div class="profile-header__inner">
+          <div class="profile-avatar" id="profile-initials" aria-hidden="true">RS</div>
+          <div class="profile-info">
+            <h1 class="profile-info__name" id="profile-name">Loading...</h1>
+            <p class="profile-info__bio">Food lover, home cook, and recipe sharer. Always looking for the next great meal!</p>
+            <div class="profile-info__meta">
+              <span class="profile-info__meta-item" id="profile-email"><i class="fas fa-envelope"></i> email@example.com</span>
+              <span class="profile-info__meta-item" id="profile-join"><i class="fas fa-calendar"></i> Joined Recently</span>
+            </div>
+          </div>
+          <div class="profile-header__actions">
+            <a href="submit.html" class="btn btn-primary"><i class="fas fa-plus"></i> Add Recipe</a>
+            <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3)" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="profile-stats" role="region" aria-label="Profile statistics">
+      <div class="container">
+        <div class="profile-stats__inner">
+          <div class="profile-stat-card"><div class="profile-stat-card__value" id="profile-stat-recipes">0</div><div class="profile-stat-card__label">Recipes</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-card__value" id="profile-stat-bookmarks">0</div><div class="profile-stat-card__label">Saved</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-card__value" id="profile-stat-reviews">0</div><div class="profile-stat-card__label">Reviews</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-card__value">4.8</div><div class="profile-stat-card__label">Avg Rating</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs Body -->
+    <section class="profile-body" aria-label="Profile content">
+      <div class="container">
+        <div class="profile-tabs">
+          <nav class="profile-tabs__nav" role="tablist" aria-label="Profile sections">
+            <button class="profile-tab-btn active" data-tab="recipes" role="tab" aria-selected="true">
+              <i class="fas fa-utensils"></i> My Recipes <span class="profile-tab-count" id="tab-count-recipes">0</span>
+            </button>
+            <button class="profile-tab-btn" data-tab="bookmarks" role="tab" aria-selected="false">
+              <i class="fas fa-bookmark"></i> Saved <span class="profile-tab-count" id="tab-count-bookmarks">0</span>
+            </button>
+            <button class="profile-tab-btn" data-tab="edit" role="tab" aria-selected="false">
+              <i class="fas fa-pencil-alt"></i> Edit Profile
+            </button>
+          </nav>
+        </div>
+
+        <!-- My Recipes Tab -->
+        <div class="profile-panel active" id="panel-recipes" role="tabpanel">
+          <div class="profile-recipes-grid stagger" id="my-recipes-grid"></div>
+        </div>
+
+        <!-- Bookmarks Tab -->
+        <div class="profile-panel" id="panel-bookmarks" role="tabpanel">
+          <div class="profile-recipes-grid stagger" id="bookmarks-grid"></div>
+        </div>
+
+        <!-- Edit Profile Tab -->
+        <div class="profile-panel" id="panel-edit" role="tabpanel">
+          <div class="profile-edit-card">
+            <h3 style="margin-bottom:var(--space-6)">Edit Your Profile</h3>
+            <form id="edit-profile-form" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="edit-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="edit-name" class="form-control" placeholder="Your full name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="edit-email">Email Address <span class="required">*</span></label>
+                <input type="email" id="edit-email" class="form-control" placeholder="you@example.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="edit-bio">Bio <span class="optional">(optional)</span></label>
+                <textarea id="edit-bio" class="form-control" rows="3" placeholder="Tell the community a bit about yourself..."></textarea>
+              </div>
+              <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                <button type="button" class="btn btn-ghost" id="logout-btn-2"><i class="fas fa-sign-out-alt"></i> Logout</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /profile-content -->
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand"><a href="index.html" class="footer__logo"><div class="footer__logo-icon"><i class="fas fa-utensils"></i></div><span class="footer__logo-text">Recipe<span>Hub</span></span></a><p class="footer__desc">Your home for community recipes.</p></div>
+      <nav class="footer__col"><h3 class="footer__col-title">Explore</h3><ul class="footer__links"><li><a href="index.html" class="footer__link"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="recipes.html" class="footer__link"><i class="fas fa-chevron-right"></i> Recipes</a></li><li><a href="submit.html" class="footer__link"><i class="fas fa-chevron-right"></i> Share Recipe</a></li></ul></nav>
+      <div class="footer__newsletter"><h3 class="footer__col-title">Newsletter</h3><p>Weekly recipes in your inbox.</p><form class="footer__newsletter-form" novalidate><input type="email" class="footer__newsletter-input" placeholder="Your email" /><button type="submit" class="footer__newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button></form></div>
+    </div>
+    <div class="footer__bottom"><p class="footer__copyright">&copy; 2025 <a href="index.html">RecipeHub</a>.</p></div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal__close" id="auth-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal__logo"><div class="modal__logo-icon"><i class="fas fa-utensils"></i></div><span class="modal__logo-text">RecipeHub</span></div>
+    <div class="modal__tabs" role="tablist"><button class="modal__tab active" data-tab="login" role="tab">Login</button><button class="modal__tab" data-tab="register" role="tab">Register</button></div>
+    <div id="login-panel" role="tabpanel"><h3 id="modal-title">Welcome back!</h3><p class="subtitle">Sign in to your account.</p><form id="login-form" novalidate><div class="form-group"><label class="form-label" for="login-email">Email <span class="required">*</span></label><input type="email" id="login-email" class="form-control" placeholder="you@example.com" /></div><div class="form-group"><label class="form-label" for="login-password">Password <span class="required">*</span></label><input type="password" id="login-password" class="form-control" placeholder="Your password" /></div><button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-sign-in-alt"></i> Sign In</button></form></div>
+    <div id="register-panel" style="display:none" role="tabpanel"><h3>Create Account</h3><p class="subtitle">Join the community free.</p><form id="register-form" novalidate><div class="form-group"><label class="form-label" for="register-name">Full Name <span class="required">*</span></label><input type="text" id="register-name" class="form-control" placeholder="Your name" /></div><div class="form-group"><label class="form-label" for="register-email">Email <span class="required">*</span></label><input type="email" id="register-email" class="form-control" placeholder="you@example.com" /></div><div class="form-group"><label class="form-label" for="register-password">Password <span class="required">*</span></label><input type="password" id="register-password" class="form-control" placeholder="Min 8 characters" /></div><div class="form-group"><label class="form-label" for="register-confirm">Confirm <span class="required">*</span></label><input type="password" id="register-confirm" class="form-control" placeholder="Repeat password" /></div><button type="submit" class="btn btn-primary w-100" style="justify-content:center"><i class="fas fa-user-plus"></i> Create Account</button></form></div>
+  </div>
+</div>
+
+<button class="scroll-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/profile.js"></script>
+</body>
+</html>

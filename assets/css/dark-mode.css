@@ -1,0 +1,328 @@
+/* ============================================================
+   dark-mode.css — RecipeHub Dark Theme Overrides
+   Description: All dark mode specific style overrides that
+                cannot be handled by CSS variables alone.
+                Applied when <html data-theme="dark">.
+                Works together with CSS variables in style.css.
+   ============================================================ */
+
+/* ─── Base Dark Overrides ─────────────────────────────────── */
+[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+/* ─── Scrollbar Styling (dark) ────────────────────────────── */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ─── Selection Color ─────────────────────────────────────── */
+[data-theme="dark"] ::selection {
+  background: rgba(231, 76, 60, 0.3);
+  color: #fff;
+}
+
+/* ─── Navbar Dark Adjustments ─────────────────────────────── */
+[data-theme="dark"] .navbar {
+  background: rgba(13, 17, 23, 0.92);
+  border-bottom-color: transparent;
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .dark-toggle {
+  background: var(--color-bg-section);
+  border-color: var(--color-border);
+  color: #F4AC30;
+}
+
+[data-theme="dark"] .dark-toggle:hover {
+  background: rgba(244, 172, 48, 0.1);
+  border-color: #F4AC30;
+  color: #F4AC30;
+}
+
+/* ─── Cards Dark ──────────────────────────────────────────── */
+[data-theme="dark"] .recipe-card {
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .recipe-card__bookmark {
+  background: rgba(22, 27, 34, 0.92);
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .recipe-card__bookmark:hover,
+[data-theme="dark"] .recipe-card__bookmark.active {
+  background: var(--color-bg-card);
+  color: var(--color-primary);
+}
+
+/* ─── Hero Section Dark ───────────────────────────────────── */
+[data-theme="dark"] .hero {
+  background: var(--color-bg);
+}
+
+[data-theme="dark"] .hero__bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(231, 76, 60, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(231, 76, 60, 0.03) 0%, transparent 60%);
+}
+
+[data-theme="dark"] .hero__search {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .hero__tag {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  color: var(--color-dark-mid);
+}
+
+[data-theme="dark"] .hero__main-card {
+  border-color: var(--color-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .hero__float-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .hero__bg-card {
+  background: rgba(231, 76, 60, 0.08);
+  border-color: rgba(231, 76, 60, 0.12);
+}
+
+/* ─── Category Cards Dark ─────────────────────────────────── */
+[data-theme="dark"] .category-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .category-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Category icon background overrides for dark mode */
+[data-theme="dark"] .cat-breakfast .category-card__icon { background: rgba(255, 152, 0, 0.12); }
+[data-theme="dark"] .cat-lunch     .category-card__icon { background: rgba(76, 175, 80, 0.12); }
+[data-theme="dark"] .cat-dinner    .category-card__icon { background: rgba(103, 58, 183, 0.12); }
+[data-theme="dark"] .cat-dessert   .category-card__icon { background: rgba(233, 30, 99, 0.12); }
+[data-theme="dark"] .cat-vegan     .category-card__icon { background: rgba(0, 150, 136, 0.12); }
+[data-theme="dark"] .cat-drinks    .category-card__icon { background: rgba(33, 150, 243, 0.12); }
+
+/* ─── How It Works Dark ───────────────────────────────────── */
+[data-theme="dark"] .how-it-works {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .how-step {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .how-step__icon {
+  background: rgba(231, 76, 60, 0.12);
+}
+
+/* ─── Filter Sidebar Dark ─────────────────────────────────── */
+[data-theme="dark"] .filter-sidebar {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .filter-sidebar__header,
+[data-theme="dark"] .filter-sidebar__actions {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .filter-option:hover {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .filter-option__count {
+  background: var(--color-bg);
+}
+
+/* ─── Form Controls Dark ──────────────────────────────────── */
+[data-theme="dark"] .form-control {
+  background: var(--color-bg-input);
+  border-color: var(--color-border);
+  color: var(--color-dark);
+}
+
+[data-theme="dark"] .form-control:focus {
+  background: var(--color-bg-card);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .form-check input[type="checkbox"],
+[data-theme="dark"] .form-check input[type="radio"],
+[data-theme="dark"] .filter-option input[type="checkbox"],
+[data-theme="dark"] .filter-option input[type="radio"] {
+  background: var(--color-bg-input);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .pill-toggle__label {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  color: var(--color-dark-mid);
+}
+
+[data-theme="dark"] .ingredient-row,
+[data-theme="dark"] .step-row {
+  background: var(--color-bg-section);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .ingredient-row:hover,
+[data-theme="dark"] .step-row:hover {
+  background: var(--color-bg-card);
+}
+
+[data-theme="dark"] .form-section {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+/* ─── Modal Dark ──────────────────────────────────────────── */
+[data-theme="dark"] .modal {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .modal__close {
+  background: var(--color-bg-section);
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .modal__tabs {
+  border-bottom-color: var(--color-border);
+}
+
+/* ─── Footer Dark ─────────────────────────────────────────── */
+[data-theme="dark"] .footer {
+  background: #040608;
+  border-top: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .footer__newsletter-input {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .footer__social-link {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Pagination Dark ─────────────────────────────────────── */
+[data-theme="dark"] .pagination__btn {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+  color: var(--color-dark-mid);
+}
+
+[data-theme="dark"] .pagination__btn:hover {
+  border-color: var(--color-primary);
+  background: rgba(231, 76, 60, 0.08);
+}
+
+/* ─── Search Bars Dark ────────────────────────────────────── */
+[data-theme="dark"] .recipes-search-bar {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .recipes-search-bar__clear {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .sort-select {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+  color: var(--color-dark);
+}
+
+/* ─── Toast Dark ──────────────────────────────────────────── */
+[data-theme="dark"] .toast {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-dark);
+}
+
+/* ─── Scroll to Top Dark ──────────────────────────────────── */
+[data-theme="dark"] .scroll-to-top {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Skeleton Dark ───────────────────────────────────────── */
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-section) 25%,
+    var(--color-border) 50%,
+    var(--color-bg-section) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Profile Page Dark ───────────────────────────────────── */
+[data-theme="dark"] .profile-header {
+  background: linear-gradient(135deg, #1A0A08, #1A1A2E);
+}
+
+[data-theme="dark"] .profile-stat-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .profile-tabs__nav {
+  border-bottom-color: var(--color-border);
+}
+
+/* ─── Recipe Detail Dark ──────────────────────────────────── */
+[data-theme="dark"] .recipe-detail-hero {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .quick-stats-bar {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .ingredient-item:hover {
+  background: var(--color-bg-section);
+}
+
+[data-theme="dark"] .review-card {
+  background: var(--color-bg-section);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .nutrition-table td {
+  border-color: var(--color-border);
+}
